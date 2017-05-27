@@ -49,14 +49,15 @@ public class StringUtil {
         return false;
     }
 
-    public static void isexceptname(List exceptid,String userId, boolean exceptname){
+    public static boolean isexceptname(List exceptid,String userId, boolean exceptname){
         for (int i = 0; i < exceptid.size(); i++) {
             if(exceptid.get(i).toString().equals(userId)){
                 exceptname=true;
             }
         }
+        return exceptname;
     }
-    public static void isCache(Map groupreply,String touserId, boolean grouprep){
+    public static boolean isCache(Map groupreply,String touserId, boolean grouprep){
         if(groupreply.containsKey(touserId)){
             if(!"0".equals(groupreply.get(touserId).toString())){
                 grouprep=true;
@@ -67,6 +68,7 @@ public class StringUtil {
         }else{
             grouprep=false;
         }
+        return grouprep;
     }
     public static void countGroupreply(Map groupreply,String touserId, List groupname,String text){
         //在群消息中当前消息的用户如果存在缓存中

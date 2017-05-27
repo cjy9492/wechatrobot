@@ -54,7 +54,7 @@ public class MessageHandler implements IMsgHandlerFace {
         String sendId = msg.getString("ToUserName");//获取当前消息接收者的id
         String touserId = msg.getString("groupSendId");//如果是群消息则获取到群消息发送者的ID
         //获取到这条消息是否是屏蔽人发送的
-        StringUtil.isexceptname(exceptid,userId,exceptname);
+        exceptname=StringUtil.isexceptname(exceptid,userId,exceptname);
         if((!userId.equals(core.getUserSelf().getString("UserName")))&&!exceptname||userId.equals(sendId)) {
             if (text.contains(close)) {
                 opentulin = false;
@@ -101,7 +101,7 @@ public class MessageHandler implements IMsgHandlerFace {
             else if (opentulin) {
                 String url = "http://www.tuling123.com/openapi/api";
                 //判断当前消息用户是否存在缓存中
-               StringUtil.isCache(groupreply,touserId,grouprep);
+                grouprep=StringUtil.isCache(groupreply,touserId,grouprep);
 
                 if (StringUtil.isgroupcall(groupname,text)||grouprep) {
                     //计算已经自动响应了几次
