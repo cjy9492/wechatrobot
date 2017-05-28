@@ -1,11 +1,10 @@
 package cn.stride.thread;
 
-import cn.zhouyafeng.itchat4j.Wechat;
+
 import cn.zhouyafeng.itchat4j.api.MessageTools;
-import cn.zhouyafeng.itchat4j.api.WechatTools;
+
 import cn.zhouyafeng.itchat4j.core.Core;
-import cn.zhouyafeng.itchat4j.core.MsgCenter;
-import cn.zhouyafeng.itchat4j.face.IMsgHandlerFace;
+
 import cn.zhouyafeng.itchat4j.utils.SleepUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
