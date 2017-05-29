@@ -84,4 +84,12 @@ public class StringUtil {
             groupreply.put(touserId,3);//如果不在缓存中，能进入到这步，那么可以肯定包含了关键词，所以重置为3
         }
     }
+
+    public static boolean isFirstreply(Map firstreply,String userId){
+        if(firstreply.containsKey(userId))
+        {
+            return false;
+        }
+        return true;
+    }
 }

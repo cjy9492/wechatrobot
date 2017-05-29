@@ -41,6 +41,7 @@ public class MessageHandler implements IMsgHandlerFace {
     private boolean grouprep=false;//当前用户是否已经在群里说过关键词
     String start =PropertiesUtil.readValue("wechatstart");
     String close =PropertiesUtil.readValue("wechatclose");
+    Map firstreply = new HashMap();//缓存在群中说出关键词的用户ID 格式类型{用户者id,剩余相应次数 默认为3}
     Map groupreply = new HashMap();//缓存在群中说出关键词的用户ID 格式类型{用户者id,剩余相应次数 默认为3}
     List excepttouserId = StringUtil.getList(PropertiesUtil.readValue("exceptname"));
     List groupname =StringUtil.getList(PropertiesUtil.readValue("groupname"));
@@ -58,6 +59,7 @@ public class MessageHandler implements IMsgHandlerFace {
         if((!userId.equals(core.getUserSelf().getString("UserName")))&&!exceptname||userId.equals(sendId)) {
             if (text.contains(close)) {
                 opentulin = false;
+                firstreply.clear();
             }
             if (text.contains(start)) {
                 opentulin = true;
@@ -79,6 +81,11 @@ public class MessageHandler implements IMsgHandlerFace {
             }
             //判断是否是群消息和是否开启图灵机器人
             if (!msg.getBoolean("groupMsg") && opentulin) {
+                if(StringUtil.isFirstreply(firstreply,userId)){
+                    String reply ="本人目前不在手机旁，无法及时回复，目前小鱼代为回复，你可以和小鱼聊会天，关闭小鱼请回复"+close+"，唤醒小鱼请回复"+start+"。小鱼目前还在成长中，有啥得罪的地方还请多多包涵。";
+                    MessageTools.sendMsgById(reply,userId);
+                    firstreply.put(userId,1);
+                }
                 String url = "http://www.tuling123.com/openapi/api";
                 Map<String, String> paramMap = new HashMap<String, String>();
                 paramMap.put("key", apiKey);
